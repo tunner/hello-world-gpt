@@ -1,41 +1,62 @@
 
-document.getElementById('loginForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const signInButton = loginForm.querySelector('button');
+    const helloWorldText = document.getElementById('hello-world');
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    // Check if token is already stored
+    const token = localStorage.getItem('cognitoToken');
+    if (token) {
+        helloWorldText.innerText = "Hey Ciao, you are logged in!";
+        signInButton.innerText = "Log Out";
+    }
 
-    const poolData = {
-        UserPoolId: process.env.REACT_APP_USER_POOL_ID, // Your user pool id here
-        ClientId: process.env.REACT_APP_CLIENT_ID // Your client id here
-    };
+    loginForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
 
-    const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        if (signInButton.innerText === "Log Out") {
+            // Log out the user
+            localStorage.removeItem('cognitoToken');
+            helloWorldText.innerText = "ByeBye";
+            signInButton.innerText = "Sign In";
+        } else {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-    const authenticationData = {
-        Username: email,
-        Password: password
-    };
-    
-    const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+            const poolData = {
+                UserPoolId: process.env.REACT_APP_USER_POOL_ID, // Your user pool id here
+                ClientId: process.env.REACT_APP_CLIENT_ID // Your client id here
+            };
 
-    const userData = {
-        Username: email,
-        Pool: userPool
-    };
-    
-    const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+            const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
-    cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: function(result) {
-            const accessToken = result.getAccessToken().getJwtToken();
-            // Store the token in local storage
-            localStorage.setItem('cognitoToken', accessToken);
-            alert('Sign-in successful!');
-        },
+            const authenticationData = {
+                Username: email,
+                Password: password
+            };
+            
+            const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
 
-        onFailure: function(err) {
-            alert(err.message || JSON.stringify(err));
-        },
+            const userData = {
+                Username: email,
+                Pool: userPool
+            };
+            
+            const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+            cognitoUser.authenticateUser(authenticationDetails, {
+                onSuccess: function(result) {
+                    const accessToken = result.getAccessToken().getJwtToken();
+                    // Store the token in local storage
+                    localStorage.setItem('cognitoToken', accessToken);
+                    helloWorldText.innerText = "Hey Ciao, you are logged in!";
+                    signInButton.innerText = "Log Out";
+                },
+
+                onFailure: function(err) {
+                    alert(err.message || JSON.stringify(err));
+                },
+            });
+        }
     });
 });
