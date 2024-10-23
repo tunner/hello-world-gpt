@@ -20,13 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Set environment variables for User Pool and Client ID
-        # Inject your secrets into the build process as environment variables
-        env:
-          REACT_APP_USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
-          REACT_APP_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-
+        
       - name: Build the website
         run: npm run build
         env:
