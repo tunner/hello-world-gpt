@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const signInButton = loginForm.querySelector('button');
     const helloWorldText = document.getElementById('hello-world');
 
+    // Define the USER_POOL_ID and CLIENT_ID
+    const USER_POOL_ID = 'your-pool-id';
+    const CLIENT_ID = 'your-client-id';
+
     // Check if token is already stored
     const token = localStorage.getItem('cognitoToken');
     if (token) {
@@ -43,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 Username: email,
                 Pool: userPool
             };
-            
+             
             const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
 
             cognitoUser.authenticateUser(authenticationDetails, {
