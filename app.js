@@ -1,5 +1,5 @@
-const USER_POOL_ID = "";
-const CLIENT_ID = "";
+const USER_POOL_ID = "eu-west-1_4VMHTzsl9";
+const CLIENT_ID = "48enkg3rdbn9914ip1vqlv7nf7";
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const signInButton = loginForm.querySelector('button');
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
 
             const poolData = {
-                UserPoolId: USER_POOL_ID, // Your user pool id here
-                ClientId: CLIENT_ID // Your client id here
+                UserPoolId: 'eu-west-1_4VMHTzsl9', // Your user pool id here
+                ClientId: '48enkg3rdbn9914ip1vqlv7nf7' // Your client id here
             };
 
             const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
