@@ -21,18 +21,14 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Inject environment variables into app.js
+      - name: Inject environment variables and build
+        run: node build.js
         env:
           USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        run: |
-          echo "USER_POOL_ID: $USER_POOL_ID"
-          echo "CLIENT_ID: $CLIENT_ID"
-          node build.js
-
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # GITHUB_TOKEN is used for pushing
-          publish_dir: ./  # Deploy from the root directory
+          publish_dir: ./dist  # Deploy from the 'dist' directory (or 'build', or 'public')
