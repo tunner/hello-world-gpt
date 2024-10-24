@@ -1,14 +1,5 @@
 const USER_POOL_ID = "eu-west-1_4VMHTzsl9";
 const CLIENT_ID = "48enkg3rdbn9914ip1vqlv7nf7";
-const poolData = {
-    UserPoolId: USER_POOL_ID,  // Now available globally
-    ClientId: CLIENT_ID        // Now available globally
-};
-
-console.log('User Pool ID:', poolData.UserPoolId);
-console.log('Client ID:', poolData.ClientId);
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const signInButton = loginForm.querySelector('button');
