@@ -11,14 +11,14 @@ jobs:
 
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3  # Checkout code
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3  # Set up Node.js to run build scripts
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Use Node.js 20
+          node-version: '20'
 
-      - name: Inject environment variables into static files
+      - name: Inject environment variables into app.js
         run: node build.js
         env:
           USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
@@ -28,4 +28,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public  # This is where the generated site is
+          publish_dir: ./  # Deploy everything from the root directory
