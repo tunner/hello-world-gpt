@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hey Ciao Website</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+    <script src="https://cdn.jcdn.net/mpm/amazon-cognito-identity-js@4.5.2/dist/amazon-cognito-identity.min.js"></script>
 </head>
 <body>
     <h1 id="hello-world">Hey Ciao</h1>
     
     <!-- Sign-In Form -->
-    
+
     <label for="nameSurname">Name and Surname:</label>
     <input type="text" id="nameSurname" name="nameSurname" required>
     <br><br>
+
     <div id="sign-in-form">
         <h2>Sign In</h2>
         <form id="loginForm">
