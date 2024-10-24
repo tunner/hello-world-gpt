@@ -4,6 +4,11 @@ const fs = require('fs');
 const userPoolId = process.env.USER_POOL_ID;
 const clientId = process.env.CLIENT_ID;
 
+// Log the environment variables for debugging purposes
+console.log('USER_POOL_ID:', userPoolId);
+console.log('CLIENT_ID:', clientId);
+
+
 // Read the app.js file from the root directory
 let jsContent = fs.readFileSync('./app.js', 'utf8');
 
