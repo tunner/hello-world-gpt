@@ -22,10 +22,14 @@ jobs:
           node-version: '20'
 
       - name: Inject environment variables into app.js
-        run: node build.js
         env:
           USER_POOL_ID: ${{ secrets.USER_POOL_ID }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        run: |
+          echo "USER_POOL_ID: $USER_POOL_ID"
+          echo "CLIENT_ID: $CLIENT_ID"
+          node build.js
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
