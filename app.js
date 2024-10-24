@@ -1,5 +1,5 @@
-const USER_POOL_ID = "eu-west-1_4VMHTzsl9";
-const CLIENT_ID = "48enkg3rdbn9914ip1vqlv7nf7";
+const USER_POOL_ID = "";
+const CLIENT_ID = "";
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     const signInButton = loginForm.querySelector('button');
