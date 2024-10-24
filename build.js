@@ -15,9 +15,10 @@ if (!userPoolId || !clientId) {
     process.exit(1); // Exit with an error code
 }
 
-// Ensure the 'dist' (or 'build') directory exists
+// Ensure the 'dist' directory exists
 const distDir = './dist';  // You can name this directory anything you like (e.g., 'build', 'public')
 if (!fs.existsSync(distDir)) {
+    console.log('Creating dist directory...');
     fs.mkdirSync(distDir);  // Create 'dist' directory if it doesn't exist
 }
 
