@@ -32,3 +32,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # GITHUB_TOKEN is used for pushing
           publish_dir: ./dist  # Deploy from the 'dist' directory (or 'build', or 'public')
+          exclude_assets: .github  # This excludes unnecessary hidden files
