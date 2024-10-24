@@ -59,3 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// New function to show captcha when button is pressed
+document.getElementById('showCaptchaBtn').addEventListener('click', function() {
+    alert('Please solve this captcha: What is 3 + 4?');
+});
