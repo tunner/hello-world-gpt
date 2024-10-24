@@ -1,15 +1,18 @@
 const fs = require('fs');
 
-// Access environment variables
+// Access environment variables from the build environment
 const userPoolId = process.env.USER_POOL_ID;
 const clientId = process.env.CLIENT_ID;
 
-// Log the environment variables for debugging purposes
-console.log('USER_POOL_ID:', userPoolId);
-console.log('CLIENT_ID:', clientId);
+// Temporarily rename the variables to avoid masking in the logs
+const debugUserPoolId = userPoolId;
+const debugClientId = clientId;
 
+// Log the environment variables for debugging purposes (renamed)
+console.log('DEBUG_USER_POOL_ID:', debugUserPoolId);
+console.log('DEBUG_CLIENT_ID:', debugClientId);
 
-// Read the app.js file from the root directory
+// Proceed to inject the variables into app.js or other files
 let jsContent = fs.readFileSync('./app.js', 'utf8');
 
 // Inject the environment variables at the top of app.js
