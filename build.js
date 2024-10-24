@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 // Access environment variables from the Node.js environment
 const userPoolId = process.env.USER_POOL_ID;
@@ -14,26 +15,27 @@ if (!userPoolId || !clientId) {
     process.exit(1); // Exit with an error code
 }
 
-// Read the app.js file from the root directory
-const appJsPath = './app.js';  // Adjust the path if app.js is in a different location
-let jsContent;
-
-try {
-    jsContent = fs.readFileSync(appJsPath, 'utf8');
-    console.log('app.js read successfully');
-} catch (error) {
-    console.error('Error reading app.js:', error);
-    process.exit(1); // Exit with an error code
+// Ensure the 'dist' (or 'build') directory exists
+const distDir = './dist';  // You can name this directory anything you like (e.g., 'build', 'public')
+if (!fs.existsSync(distDir)) {
+    fs.mkdirSync(distDir);  // Create 'dist' directory if it doesn't exist
 }
 
-// Inject the environment variables at the top of app.js
-jsContent = `const USER_POOL_ID = "${userPoolId}";\nconst CLIENT_ID = "${clientId}";\n` + jsContent;
+// Copy the original app.js to the 'dist' folder
+const sourceAppJsPath = './app.js';  // Your original app.js location
+const distAppJsPath = path.join(distDir, 'app.js');
 
-// Write the modified content back to app.js
 try {
-    fs.writeFileSync(appJsPath, jsContent);
-    console.log('Environment variables injected into app.js successfully');
+    let jsContent = fs.readFileSync(sourceAppJsPath, 'utf8');
+    console.log('app.js read successfully');
+
+    // Inject the environment variables at the top of app.js
+    jsContent = `const USER_POOL_ID = "${userPoolId}";\nconst CLIENT_ID = "${clientId}";\n` + jsContent;
+
+    // Write the modified content to dist/app.js
+    fs.writeFileSync(distAppJsPath, jsContent);
+    console.log('Environment variables injected into dist/app.js successfully');
 } catch (error) {
-    console.error('Error writing app.js:', error);
+    console.error('Error processing app.js:', error);
     process.exit(1); // Exit with an error code
 }
