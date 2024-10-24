@@ -4,21 +4,13 @@ const fs = require('fs');
 const userPoolId = process.env.USER_POOL_ID;
 const clientId = process.env.CLIENT_ID;
 
-// Modify index.html to include these variables (or app.js if you prefer)
-let htmlContent = fs.readFileSync('./index.html', 'utf8');
+// Inject the variables into app.js
+let jsContent = fs.readFileSync('./app.js', 'utf8');
 
-// Inject environment variables in a <script> tag in the HTML
-htmlContent = htmlContent.replace(
-  '</body>',
-  `<script>
-    const USER_POOL_ID = "${userPoolId}";
-    const CLIENT_ID = "${clientId}";
-    console.log('User Pool ID:', USER_POOL_ID);
-    console.log('Client ID:', CLIENT_ID);
-  </script></body>`
-);
+// Add global variables for User Pool ID and Client ID at the top of app.js
+jsContent = `const USER_POOL_ID = "${userPoolId}";\nconst CLIENT_ID = "${clientId}";\n` + jsContent;
 
-// Write the modified HTML to the public folder for deployment
-fs.writeFileSync('./public/index.html', htmlContent);
+// Write the modified content back to app.js or to ./public/app.js for deployment
+fs.writeFileSync('./public/app.js', jsContent);
 
-console.log('Environment variables injected into index.html');
+console.log('Environment variables injected into app.js');
