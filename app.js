@@ -1,3 +1,11 @@
+const poolData = {
+    UserPoolId: USER_POOL_ID,  // Now available globally
+    ClientId: CLIENT_ID        // Now available globally
+};
+
+console.log('User Pool ID:', poolData.UserPoolId);
+console.log('Client ID:', poolData.ClientId);
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
