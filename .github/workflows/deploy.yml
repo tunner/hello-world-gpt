@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # This grants write permission to the GITHUB_TOKEN
+
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
@@ -27,5 +30,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Deploy everything from the root directory
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # GITHUB_TOKEN is used for pushing
+          publish_dir: ./  # Deploy from the root directory
