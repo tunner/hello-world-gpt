@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('password').value;
 
             const poolData = {
-                UserPoolId: USER_POOL_ID, // Your user pool id here
-                ClientId: CLIENT_ID // Your client id here
+                UserPoolId: 'eu-west-1_4VMHTzsl9', // Your user pool id here
+                ClientId: '48enkg3rdbn9914ip1vqlv7nf7' // Your client id here
             };
 
             const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
